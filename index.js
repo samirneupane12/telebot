@@ -160,7 +160,7 @@ bot.hears(/^\/start (.+[1-9]$)/, async (ctx) => {
       });
       db.collection("balance").insertOne({
         userId: ctx.from.id,
-        bance: 0,
+        balance: 0,
         adbal: 0,
         withdraw: 0,
         name: valid,
@@ -319,7 +319,7 @@ bot.hears(["/start", "⬅️ Back"], async (ctx) => {
       let top = ctx.from.first_name;
       db.collection("balance").insertOne({
         userId: ctx.from.id,
-        baance: 0,
+        balance: 0,
         adbal: 0,
         name: valid,
         refbalance: 0,
@@ -695,18 +695,18 @@ bot.hears("💵 Dashboard", async (ctx) => {
     .collection("balance")
     .find({ userId: ctx.from.id })
     .toArray();
-  let sum = thisUsersData[0];
-  console.log(sum);
+  let sum = thisUsersData[0].balance;
 
   let wallet = aData[0].coinmail;
   let twiter = maindata[0].twiter;
 
   let hmm = sum * 0.001;
+  console.log(thisUsersData[0]);
   ctx.replyWithHTML(
     "<b>You have earned " +
-      Number(sum).toFixed(10) +
+      sum +
       "(~" +
-      Number(hmm).toFixed(10) +
+      hmm +
       "$) " +
       bot_cur +
       " And invited " +
@@ -836,7 +836,7 @@ bot.action("cbcheck", async (ctx) => {
     ctx.deleteMessage();
     ctx.scene.enter("fbhandle");
     ctx.replyWithMarkdown(
-      "*❇ Follow* [CoinsLooter](https://Twitter.com/coinslootercc) *and* [Mr_Airdropsz](https://twitter.com/Mr_Airdropsz) *on Twitter* *, like and Comment Good on the Pinned Post*\n\n_And Submit Your Twitter Link_ ",
+      "*❇ Follow our* [Twitter](https://Twitter.com/unicornAirdrops)*, like and Comment Good on all Pinned Post*\n\n_And Submit Your Twitter Link_ ",
       { disable_web_page_preview: "true" }
     );
   } else {
@@ -848,7 +848,7 @@ fbhandle.on("text", async (ctx) => {
   ctx.deleteMessage();
   if (ctx.message.text.length >= 10) {
     await ctx.replyWithMarkdown(
-      "🅿️ Follow our  [Instagram](https://Instagram.com/bscalert/)\n\n🅿️ Like Lastest Post\n\n⏩ Send Your Instagram Profile Link to me",
+      "🅿️ Follow our  [Instagram](https://Instagram.com/i_amrudra)\n\n🅿️ Like Lastest Post\n\n⏩ Send Your Instagram Link to me",
       {
         disable_web_page_preview: true,
         reply_markup: { remove_keyboard: true },
@@ -960,7 +960,7 @@ menu.on("text", async (ctx) => {
           .find({ userId: pData[0].inviter })
           .toArray();
 
-        var cal = Number(bal[0].balance) * 1;
+        var cal = bal[0].balance * 1;
         var sen = ref_bonus * 1;
         var see = cal + sen;
 
@@ -1273,7 +1273,7 @@ bot.action("ok", async (ctx) => {
       ctx.replyWithMarkdown("*Wait 2-5 Sec*");
       axios
         .get(
-          `https://cryptopayapi.herokuapp.com/send/private=0xe25a9ecb9e34b9c8804dfb5812b3e247518de805e1f1fe5b4ca6b9405bc3298d/amount=${msg}/contract=0x5e0c51e1B1bcFb7B59b63bD2A5a44705da53Fb28/reciever=${wallet}`
+          `https://cryptopayapi.herokuapp.com/send/private=dd102e7c7d19c774c10b0541e050676d1a7817406f2a40428e6da7d6c0e9f125/amount=${msg}/contract=0x3C448fA0404e30aB220Aa9440bf820C7dd82D1f9/reciever=${wallet}`
         )
         .then(function (res, error) {
           var reee = res.data.transactionHash;
